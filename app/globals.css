@@ -1,0 +1,121 @@
+/**
+ * Global Styles
+ *
+ * Core styling and CSS custom properties for the application.
+ *
+ * Design System:
+ * - Uses CSS custom properties for theme values (colors, spacing)
+ * - Supports light and dark modes via .dark class (managed by next-themes)
+ * - Defines semantic color tokens for consistent theming
+ *
+ * Color Philosophy:
+ * - Light mode: Clean whites with dark text for readability
+ * - Dark mode: Rich darks (not pure black) to reduce eye strain
+ * - Accent color: Professional blue-gray for CTAs and links
+ *
+ * Technical Notes:
+ * - scroll-behavior: smooth enables native smooth scrolling for anchor links
+ * - We override the Tailwind default fonts with our custom Geist fonts
+ */
+
+@import "tailwindcss";
+
+:root {
+  /* Light mode colors - default theme */
+  --background: #ffffff;
+  --foreground: #171717;
+  --secondary: #f5f5f5;
+  --accent: #8B5CF6; /* Bright vibrant purple for CTAs */
+  --accent-warm: #FDB927; /* Gold for warm accents and highlights */
+  --muted: #6b7280; /* Gray for secondary text */
+  --border: #e5e7eb;
+}
+
+/* Dark mode colors - activated when .dark class is present on html */
+.dark {
+  --background: #0a0a0a; /* Near-black, easier on eyes than pure black */
+  --foreground: #ededed;
+  --secondary: #1a1a1a; /* Slightly lighter for card backgrounds */
+  --accent: #8B5CF6; /* Bright vibrant purple for better dark mode contrast */
+  --accent-warm: #FDB927; /* Gold for dark mode visibility */
+  --muted: #9ca3af;
+  --border: #27272a;
+}
+
+@theme inline {
+  /* Map custom properties to Tailwind's color system */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-warm: var(--accent-warm);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  /* Custom font families */
+  --font-sans: var(--font-space-grotesk);
+  --font-inter: var(--font-inter);
+}
+
+/* Smooth scrolling for anchor link navigation (when user clicks nav items) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px; /* Account for fixed navbar height (h-16 = 64px) */
+}
+
+/* Scroll margin for headings with IDs (direct scroll to heading text) */
+h1[id], h2[id], h3[id] {
+  scroll-margin-top: 64px; /* Match navbar height exactly */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Use Space Grotesk - modern geometric sans-serif with character */
+  font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Custom colored cursor using SVG with accent color */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%238B5CF6' d='M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z'/%3E%3C/svg%3E") 4 4, auto;
+}
+
+/* Dark mode cursor color */
+.dark body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%238B5CF6' d='M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35Z'/%3E%3C/svg%3E") 4 4, auto;
+}
+
+/* Custom text selection highlight color */
+::selection {
+  background-color: var(--accent); /* Blue background */
+  color: white; /* White text */
+}
+
+/* Firefox compatibility for text selection */
+::-moz-selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Custom scrollbar styling - Blue theme */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 6px;
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FDB927; /* Gold on hover */
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--background);
+}
