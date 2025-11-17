@@ -49,30 +49,6 @@ interface AnimatedSectionProps {
   delay?: number;
 }
 
-/**
- * Animation Variants
- *
- * Defines the initial and final states of the animation.
- *
- * hidden: Starting state (invisible, slightly below)
- * - opacity: 0 makes element invisible
- * - y: 30 moves element 30px down (creates upward motion effect)
- *
- * visible: End state (fully visible, original position)
- * - opacity: 1 makes element fully visible
- * - y: 0 returns element to natural position
- */
-const variants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-};
-
 export function AnimatedSection({
   children,
   className = '',
@@ -82,23 +58,19 @@ export function AnimatedSection({
     <motion.div
       /**
        * Initial State
-       * Element starts in 'hidden' variant state
+       * Element starts invisible and below
        */
-      initial="hidden"
+      initial={{ opacity: 0, y: 30 }}
       /**
        * Viewport-triggered Animation
        *
-       * whileInView: Animates to 'visible' when element enters viewport
+       * whileInView: Animates when element enters viewport
        * viewport settings:
        * - once: true - Animation plays only once (better performance)
        * - amount: 0.2 - Triggers when 20% of element is visible
        *              (earlier trigger feels more responsive)
-       *
-       * Alternative amounts:
-       * - 0.5: Waits until half the element is visible
-       * - 1.0: Waits until entire element is visible
        */
-      whileInView="visible"
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       /**
        * Transition
@@ -107,9 +79,8 @@ export function AnimatedSection({
       transition={{
         duration: 0.6,
         delay,
-        ease: [0.4, 0, 0.2, 1], // easeOut cubic-bezier curve
+        ease: [0.4, 0, 0.2, 1],
       }}
-      variants={variants}
       className={className}
     >
       {children}
