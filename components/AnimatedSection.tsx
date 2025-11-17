@@ -61,25 +61,16 @@ interface AnimatedSectionProps {
  * visible: End state (fully visible, original position)
  * - opacity: 1 makes element fully visible
  * - y: 0 returns element to natural position
- * - transition: Controls animation timing
- *   * duration: 0.6s feels smooth without being sluggish
- *   * ease: "easeOut" creates natural deceleration
- *   * delay: Allows staggered animations
  */
 const variants = {
   hidden: {
     opacity: 0,
     y: 30,
   },
-  visible: (delay: number = 0) => ({
+  visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      delay,
-      ease: 'easeOut',
-    },
-  }),
+  },
 };
 
 export function AnimatedSection({
@@ -110,10 +101,14 @@ export function AnimatedSection({
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       /**
-       * Custom Variants
-       * Pass delay to visible variant for staggered animations
+       * Transition
+       * Controls animation timing with delay for staggered animations
        */
-      custom={delay}
+      transition={{
+        duration: 0.6,
+        delay,
+        ease: [0.4, 0, 0.2, 1], // easeOut cubic-bezier curve
+      }}
       variants={variants}
       className={className}
     >
