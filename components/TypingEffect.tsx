@@ -102,7 +102,7 @@ export function TypingEffect({
     <span className={className}>
       {currentText}
       {/* Blinking cursor */}
-      <span className="animate-pulse ml-1 text-[#000000]">|</span>
+      <span className="animate-pulse ml-1 text-black dark:text-white">|</span>
     </span>
   );
 }

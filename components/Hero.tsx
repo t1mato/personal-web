@@ -72,7 +72,7 @@ export function Hero() {
                   phrases={[
                     'developing full-stack apps',
                     'playing volleyball',
-                    'photography',
+                    'film photography',
                     'the next recipe to make',
                     'where to travel next',
                   ]}

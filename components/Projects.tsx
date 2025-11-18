@@ -177,10 +177,10 @@ export function Projects() {
         </AnimatedSection>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 auto-rows-fr">
           {projects.map((project, index) => (
             <AnimatedSection key={index} delay={0.1 + index * 0.1}>
-              <div className="bg-background border border-border rounded-xl overflow-hidden hover:shadow-xl hover:border-accent-warm/70 transition-all duration-300 flex flex-col">
+              <div className="bg-background border border-border rounded-xl overflow-hidden hover:shadow-xl hover:border-accent-warm/70 transition-all duration-300 flex flex-col h-full">
               {/* Project Thumbnail */}
               {project.thumbnail && (
                 <div className="relative w-full h-48 bg-secondary">
