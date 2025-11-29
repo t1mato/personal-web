@@ -48,9 +48,6 @@ const contactSchema = z.object({
   message: z.string().min(10).max(1000),
 });
 
-// Initialize Resend with API key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 /**
  * POST Handler
  *
@@ -114,6 +111,9 @@ export async function POST(request: NextRequest) {
      * Using onboarding@resend.dev for testing (Resend's test domain).
      */
     try {
+      // Initialize Resend with API key (lazy initialization for runtime-only access)
+      const resend = new Resend(process.env.RESEND_API_KEY);
+
       await resend.emails.send({
         from: 'onboarding@resend.dev', // Resend's test domain - replace with your verified domain
         to: 'timlee.dev@gmail.com',
