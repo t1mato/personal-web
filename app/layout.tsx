@@ -19,6 +19,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Space Grotesk: Modern geometric sans-serif with character
 // Perfect for tech portfolios with its clean, contemporary look
@@ -74,6 +76,10 @@ export default function RootLayout({
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        {/* Vercel Analytics for visitor tracking and page view stats */}
+        <Analytics />
+        {/* Speed Insights for performance metrics */}
+        <SpeedInsights />
       </body>
     </html>
   );

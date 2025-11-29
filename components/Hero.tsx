@@ -39,9 +39,12 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-16 lg:gap-32 items-center justify-items-center lg:justify-items-start">
           {/* Profile Image - Left Side */}
           <div className="flex justify-center">
-            <div className="relative">
+            <div className="relative group">
+              {/* Animated gradient border background */}
+              <div className="absolute -inset-1 bg-linear-to-r from-accent via-accent-warm to-accent rounded-full opacity-0 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500 animate-gradient-rotate"></div>
+
               {/* Image container - clean and simple */}
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-linear-to-br from-accent/10 via-accent-warm/10 to-accent/5 border-4 border-background shadow-2xl overflow-hidden flex items-center justify-center">
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-linear-to-br from-accent/10 via-accent-warm/10 to-accent/5 border-4 border-background shadow-2xl overflow-hidden flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02]">
                 {/* Placeholder emoji - replace with <Image src="/profile.jpg" alt="Timothy Lee" fill className="object-cover" /> */}
                 <span className="text-8xl sm:text-9xl lg:text-[10rem]">
                   <Image src="/me.jpg" alt="Timothy Lee" fill className="object-cover" />

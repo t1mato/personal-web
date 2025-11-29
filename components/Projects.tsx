@@ -63,6 +63,7 @@ import {
   SiGooglecloud,
   SiHtml5,
   SiClerk,
+  SiNetlify,
 } from 'react-icons/si';
 import { IconType } from 'react-icons';
 
@@ -103,7 +104,8 @@ const techIconMap: Record<string, TechIcon> = {
   'Android Studio': { icon: SiAndroidstudio, color: '#3DDC84' },
   'Gemini API': {icon: SiGooglecloud, color: '#4285F4'},
   'HTML': {icon: SiHtml5, color: '#E34C26'},
-  'Clerk': {icon: SiClerk, color: ''}
+  'Clerk': {icon: SiClerk, color: ''},
+  'Netlify': {icon: SiNetlify, color: '#014847'}
 };
 
 /**
