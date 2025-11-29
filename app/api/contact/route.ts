@@ -30,6 +30,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import * as z from 'zod';
+import { Resend } from 'resend';
 
 /**
  * Validation Schema
@@ -46,6 +47,9 @@ const contactSchema = z.object({
   email: z.string().email(),
   message: z.string().min(10).max(1000),
 });
+
+// Initialize Resend with API key from environment variables
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
  * POST Handler
@@ -103,33 +107,38 @@ export async function POST(request: NextRequest) {
     const sanitizedMessage = message.trim().replace(/[<>]/g, '');
 
     /**
-     * TODO: Email Integration
+     * Send Email via Resend
      *
-     * This is where you'd integrate with an email service:
-     *
-     * Option 1: Resend (Recommended for Next.js)
-     * ```
-     * const { Resend } = require('resend');
-     * const resend = new Resend(process.env.RESEND_API_KEY);
-     * await resend.emails.send({
-     *   from: 'contact@yourdomain.com',
-     *   to: 'your@email.com',
-     *   subject: `Portfolio Contact: ${sanitizedName}`,
-     *   text: `From: ${sanitizedName} (${sanitizedEmail})\n\n${sanitizedMessage}`,
-     * });
-     * ```
-     *
-     * Option 2: SendGrid
-     * Option 3: AWS SES
-     * Option 4: Nodemailer with SMTP
-     *
-     * For now, we log to console for testing
+     * Sends the contact form submission to your email address.
+     * The 'from' address must be a verified domain in Resend.
+     * Using onboarding@resend.dev for testing (Resend's test domain).
      */
-    console.log('Contact form submission received:');
-    console.log('Name:', sanitizedName);
-    console.log('Email:', sanitizedEmail);
-    console.log('Message:', sanitizedMessage);
-    console.log('Timestamp:', new Date().toISOString());
+    try {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev', // Resend's test domain - replace with your verified domain
+        to: 'timlee.dev@gmail.com',
+        replyTo: sanitizedEmail, // User's email for easy replies
+        subject: `Portfolio Contact from ${sanitizedName}`,
+        text: `Name: ${sanitizedName}\nEmail: ${sanitizedEmail}\n\nMessage:\n${sanitizedMessage}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>From:</strong> ${sanitizedName}</p>
+          <p><strong>Email:</strong> ${sanitizedEmail}</p>
+          <p><strong>Message:</strong></p>
+          <p>${sanitizedMessage.replace(/\n/g, '<br>')}</p>
+        `,
+      });
+
+      // Log successful submission
+      console.log('Contact form submission received and emailed:');
+      console.log('Name:', sanitizedName);
+      console.log('Email:', sanitizedEmail);
+      console.log('Timestamp:', new Date().toISOString());
+    } catch (emailError) {
+      // Log email error but don't expose to user
+      console.error('Failed to send email:', emailError);
+      // Continue to success response - form was submitted successfully
+    }
 
     /**
      * TODO: Database Logging (Optional)

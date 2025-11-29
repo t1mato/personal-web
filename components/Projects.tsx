@@ -61,6 +61,8 @@ import {
   SiFirebase,
   SiAndroidstudio,
   SiGooglecloud,
+  SiHtml5,
+  SiClerk,
 } from 'react-icons/si';
 import { IconType } from 'react-icons';
 
@@ -100,6 +102,8 @@ const techIconMap: Record<string, TechIcon> = {
   'Firebase': { icon: SiFirebase, color: '#FFCA28' },
   'Android Studio': { icon: SiAndroidstudio, color: '#3DDC84' },
   'Gemini API': {icon: SiGooglecloud, color: '#4285F4'},
+  'HTML': {icon: SiHtml5, color: '#E34C26'},
+  'Clerk': {icon: SiClerk, color: ''}
 };
 
 /**
@@ -146,11 +150,20 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/UAVGCSTeam/GCS',
   },
   {
+    title: 'BroncoBites',
+    description:
+      'A smart meal planning application tailored for Cal Poly Pomona students. Designed for personalized suggestions from campus dining halls and markets that can match the user\'s fitness goals.',
+    technologies: ['TypeScript', 'JavaScript', 'Python', 'HTML', 'CSS', 'MongoDB', 'Clerk', 'Docker'],
+    thumbnail: '/broncobites-banner.png', // Add your project thumbnail here
+    liveUrl: 'https://broncobites.com',
+    githubUrl: 'https://github.com/YuAreMySunshine/BroncoBites',
+  },
+  {
     title: 'Epic Pomona Website',
     description:
       'A personal portfolio website built with Next.js featuring dark mode, smooth animations, contact form, and responsive design across all devices.',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Netlify'],
-    thumbnail: '/projects/epic-pomona.png', // Add your project thumbnail here
+    thumbnail: '/epic-banner.png', // Add your project thumbnail here
     liveUrl: 'https://epicpomona.com',
     githubUrl: 'https://github.com/jaroonl/epicpomona',
   },
