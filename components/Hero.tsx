@@ -99,7 +99,7 @@ export function Hero() {
 
               {/* Secondary CTA - Download Resume */}
               <a
-                href="/resume.pdf"
+                href="/Timothy-Lee-Software-Engineer-Resume.pdf"
                 download="Timothy-Lee-Software-Engineer-Resume.pdf"
                 className="group relative flex items-center gap-2 px-8 py-4 bg-accent-warm text-white rounded-2xl font-semibold hover:bg-accent-warm/90 transition-all duration-300 shadow-lg shadow-accent-warm/20 hover:shadow-2xl hover:shadow-accent-warm/30 hover:scale-105 hover:-translate-y-1"
               >
